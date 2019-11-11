@@ -64,7 +64,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         Parentheses parentheses = new Parentheses();
-        System.out.print("Введите строку: ");
+        System.out.print("Enter the string: ");
         String string = in.nextLine();
         parentheses.setStr(string);
         System.out.println(parentheses.processing());
