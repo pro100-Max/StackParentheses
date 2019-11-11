@@ -8,12 +8,11 @@ class Parentheses {
 
     void setStr(String string) {
         this.string = string;
-        checkLength();
     }
 
-    private void checkLength() {
+    boolean checkLength() {
         if (string.charAt(string.length() - 1) == '{' || string.charAt(string.length() - 1) == '(' || string.charAt(string.length() - 1) == '[') {
-            result = false;
+            return result;
         }
         int a = 0;
         int b = 0;
@@ -28,7 +27,7 @@ class Parentheses {
         if (a == b) {
             processing();
         }
-        messageResult();
+        return result;
     }
 
     private void findItem() {
@@ -43,10 +42,6 @@ class Parentheses {
         return i;
     }
 
-    private void messageResult() {
-        System.out.println(result);
-    }
-
     private void processing() {
         int i = 0;
         while (string.length() != 2) {
@@ -58,9 +53,6 @@ class Parentheses {
             }
             i = changePosition(i);
         }
-        currentItem = string.charAt(0);
-        nextItem = string.charAt(1);
-        findItem();
     }
 }
 
@@ -71,5 +63,6 @@ public class Main {
         System.out.print("Enter the string: ");
         String string = in.nextLine();
         parentheses.setStr(string);
+        System.out.println(parentheses.checkLength());
     }
 }
