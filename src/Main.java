@@ -11,8 +11,44 @@ class Parentheses {
         checkLength();
     }
 
-    boolean processing() {
-        byte i = 0;
+    private void checkLength() {
+        if (string.charAt(string.length() - 1) == '{' || string.charAt(string.length() - 1) == '(' || string.charAt(string.length() - 1) == '[') {
+            result = false;
+        }
+        int a = 0;
+        int b = 0;
+        for (int i = 0; i < string.length(); i++) {
+            if (string.charAt(i) == '[' || string.charAt(i) == '(' || string.charAt(i) == '{') {
+                a++;
+            }
+            if (string.charAt(i) == ']' || string.charAt(i) == ')' || string.charAt(i) == '}') {
+                b++;
+            }
+        }
+        if (a == b) {
+            processing();
+        }
+        messageResult();
+    }
+
+    private void findItem() {
+        result = (currentItem == '{' && nextItem == '}') || (currentItem == '(' && nextItem == ')') || (currentItem == '[' && nextItem == ']');
+    }
+
+    private int changePosition(int i) {
+        if (string.length() != 2)
+            i++;
+        if (result || i > 2)
+            i = 0;
+        return i;
+    }
+
+    private void messageResult() {
+        System.out.println(result);
+    }
+
+    private void processing() {
+        int i = 0;
         while (string.length() != 2) {
             currentItem = string.charAt(i);
             nextItem = string.charAt(i + 1);
@@ -25,38 +61,6 @@ class Parentheses {
         currentItem = string.charAt(0);
         nextItem = string.charAt(1);
         findItem();
-        return result;
-    }
-
-    private void checkLength() {
-        byte a = 0;
-        byte b = 0;
-        for (int i = 0; i < string.length(); i++) {
-            if (string.charAt(i) == '[' || string.charAt(i) == '(' || string.charAt(i) == '{') {
-                a++;
-            }
-            if (string.charAt(i) == ']' || string.charAt(i) == ')' || string.charAt(i) == '}') {
-                b++;
-            }
-        }
-        if (a == b) {
-            processing();
-        }
-        if (string.charAt(string.length() - 1) == '{' || string.charAt(string.length() - 1) == '(' || string.charAt(string.length() - 1) == '[') {
-            result = false;
-        }
-    }
-
-    private void findItem() {
-        result = (currentItem == '{' && nextItem == '}') || (currentItem == '(' && nextItem == ')') || (currentItem == '[' && nextItem == ']');
-    }
-
-    private byte changePosition(byte i) {
-        if (string.length() != 2)
-            i++;
-        if (result || i > 2)
-            i = 0;
-        return i;
     }
 }
 
@@ -67,6 +71,5 @@ public class Main {
         System.out.print("Enter the string: ");
         String string = in.nextLine();
         parentheses.setStr(string);
-        System.out.println(parentheses.processing());
     }
 }
