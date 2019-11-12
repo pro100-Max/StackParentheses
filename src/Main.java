@@ -11,16 +11,12 @@ class Parentheses {
     }
 
     boolean checkLength() {
-        if (string.charAt(string.length() - 1) == '{' || string.charAt(string.length() - 1) == '(' || string.charAt(string.length() - 1) == '[') {
-            return result;
-        }
         int a = 0;
         int b = 0;
         for (int i = 0; i < string.length(); i++) {
             if (string.charAt(i) == '[' || string.charAt(i) == '(' || string.charAt(i) == '{') {
                 a++;
-            }
-            if (string.charAt(i) == ']' || string.charAt(i) == ')' || string.charAt(i) == '}') {
+            } else {
                 b++;
             }
         }
@@ -30,13 +26,7 @@ class Parentheses {
         return result;
     }
 
-    private void findItem() {
-        result = (currentItem == '{' && nextItem == '}') || (currentItem == '(' && nextItem == ')') || (currentItem == '[' && nextItem == ']');
-    }
-
     private int changePosition(int i) {
-        if (string.length() != 2)
-            i++;
         if (result || i > 2)
             i = 0;
         return i;
@@ -47,7 +37,7 @@ class Parentheses {
         while (string.length() != 0) {
             currentItem = string.charAt(i);
             nextItem = string.charAt(i + 1);
-            findItem();
+            result = (currentItem == '{' && nextItem == '}') || (currentItem == '(' && nextItem == ')') || (currentItem == '[' && nextItem == ']');
             if (result || string.length() == 2) {
                 string = string.substring(0, i) + string.substring(i + 2);
             }
