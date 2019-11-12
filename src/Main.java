@@ -44,11 +44,11 @@ class Parentheses {
 
     private void processing() {
         int i = 0;
-        while (string.length() != 2) {
+        while (string.length() != 0) {
             currentItem = string.charAt(i);
             nextItem = string.charAt(i + 1);
             findItem();
-            if (result) {
+            if (result || string.length() == 2) {
                 string = string.substring(0, i) + string.substring(i + 2);
             }
             i = changePosition(i);
