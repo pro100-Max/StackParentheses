@@ -27,6 +27,7 @@ class Parentheses {
     }
 
     private int changePosition(int i) {
+        i++;
         if (result || i > 2)
             i = 0;
         return i;
