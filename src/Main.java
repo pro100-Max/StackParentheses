@@ -2,8 +2,6 @@ import java.util.Scanner;
 
 class Parentheses {
     private String string;
-    private char currentItem;
-    private char nextItem;
     private boolean result;
 
     void setStr(String string) {
@@ -11,6 +9,10 @@ class Parentheses {
     }
 
     boolean checkLength() {
+        if ((string.charAt(0) == '[' || string.charAt(0) == '(' || string.charAt(0) == '{') ||
+                (string.charAt(string.length() - 1) == '[' || string.charAt(string.length() - 1) == '(' || string.charAt(string.length() - 1) == '{')) {
+            return result;
+        }
         int a = 0;
         int b = 0;
         for (int i = 0; i < string.length(); i++) {
@@ -26,23 +28,18 @@ class Parentheses {
         return result;
     }
 
-    private int changePosition(int i) {
-        i++;
-        if (result || i > 2)
-            i = 0;
-        return i;
-    }
-
     private void processing() {
         int i = 0;
         while (string.length() != 0) {
-            currentItem = string.charAt(i);
-            nextItem = string.charAt(i + 1);
+            char currentItem = string.charAt(i);
+            char nextItem = string.charAt(i + 1);
             result = (currentItem == '{' && nextItem == '}') || (currentItem == '(' && nextItem == ')') || (currentItem == '[' && nextItem == ']');
             if (result || string.length() == 2) {
                 string = string.substring(0, i) + string.substring(i + 2);
+                i = 0;
+            } else {
+                i++;
             }
-            i = changePosition(i);
         }
     }
 }
